@@ -9,11 +9,11 @@ class Nagios
 
     def getData
 
-        uri = URI.parse("http://172.16.14.103/nagios/cgi-bin/status.cgi?limit=100&host=all&servicestatustypes=16&hoststatustypes=15")
+        uri = URI.parse("http://{host}/nagios/cgi-bin/status.cgi?limit=100&host=all&servicestatustypes=16&hoststatustypes=15")
 
         http = Net::HTTP.new(uri.host, uri.port)
         request = Net::HTTP::Get.new(uri.request_uri)
-        request.basic_auth("pedro.junior", "The123456789@")
+        request.basic_auth("{user}", "{psk}")
         response = http.request(request)
         html = response.body
         doc = Nokogiri::HTML(html)
